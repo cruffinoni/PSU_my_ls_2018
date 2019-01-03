@@ -47,5 +47,6 @@ int get_color(unsigned char red, unsigned char green, unsigned char blue);
 int my_isalphanumeric(char c);
 int my_strtol(char *str, char **endptr);
 int my_printf(char const *src, ...);
+char *my_strdupcat(char *origin, char *to_add);
 
 #endif

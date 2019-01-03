@@ -43,6 +43,7 @@ SRC		= 	get_color.c 						\
 			my_strupcase.c 						\
 			my_swap.c 							\
 			my_strtol.c 						\
+			my_strdupcat.c 						\
 			./my_printf/src/my_printf.c 						\
 			./my_printf/src/type/signed_int/small_len.c 		\
 			./my_printf/src/type/signed_int/big_len.c 			\

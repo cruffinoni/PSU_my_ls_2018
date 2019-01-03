@@ -8,6 +8,8 @@
 #ifndef HEADER_SRC_ERRORS
 #define HEADER_SRC_ERRORS
 
-#define ERR_MALLOC (-1)
-#define ERR_NONE (0)
-#define ERR_FOLDER (1)
+#define ERR_MALLOC      (-1)
+#define ERR_NONE        (0)
+#define ERR_FOLDER      (1)
+
+#endif

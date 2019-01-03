@@ -5,9 +5,10 @@
 ## This file is used for compliation of src and lib
 ##
 
-SRC	=	./src/
+SRC	=	./src/node/folder.c \
+		./src/node/file.c
 
-MAIN_FILE = ./src/main.c
+MAIN_FILE = ./main.c
 
 SRC_TEST = 	./tests/
 
@@ -22,14 +23,16 @@ CFLAGS	=	-W -Wall -Wextra -I $(INCLUDE_PATH) -L $(LIB_PATH) -lmy
 OBJ	=	$(SRC:.c=.o)
 OBJ_MAIN = $(MAIN_FILE:.c=.o)
 
-$(NAME): $(OBJ) $(OBJ_MAIN)
-		$(MAKE) -C $(LIB_PATH)
+$(NAME): compile_lib $(OBJ) $(OBJ_MAIN)
 		gcc -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) -g
 
 all: $(NAME)
 
 debug:
 	gcc -o $(NAME) $(SRC) $(MAIN_FILE) $(CFLAGS) -g
+
+compile_lib:
+	$(MAKE) -C $(LIB_PATH)
 
 tests_run:
 	$(MAKE) -C $(LIB_PATH)
@@ -46,4 +49,4 @@ fclean:
 
 re:		fclean all
 
-.PHONY: 	all clean fclean re debug
+.PHONY: 	all clean fclean re debug compile_lib

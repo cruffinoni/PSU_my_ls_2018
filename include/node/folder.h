@@ -9,5 +9,7 @@
 #define HEADER_SRC_NODE_FOLDER
 
 int add_folder(t_folder **last_node, char *path);
+void display_folders(t_folder *header);
+void delete_folders(t_folder **last_node);
 
 #endif
