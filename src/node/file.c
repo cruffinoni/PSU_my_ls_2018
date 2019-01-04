@@ -32,6 +32,7 @@ int read_files(t_folder *folder)
     char *new_string = my_strdupcat(folder->path, current_file->d_name);
 
     returned_val = stat(new_string, &current_stat);
+    // printf("Reading file from: '%s' w/ %p & %i\n", new_string, current_file, returned_val);
     while (current_file != NULL && returned_val != -1) {
         if (add_file(&folder->hfile, current_file, current_stat) != ERR_NONE)
             return (ERR_MALLOC);
@@ -47,15 +48,17 @@ int read_files(t_folder *folder)
     return (ERR_NONE);
 }
 
-void display_files(t_file *header)
+void display_files(t_file *header, t_display_flags flags)
 {
     while (header != NULL) {
         // my_printf("\nFile's name: '%s'\n", header->dirent->d_name);
+        // my_printf("Last modification: %i\n", header->stat.st_mtime);
         // my_printf("File size: %i bytes\n", header->stat.st_size);
         // my_printf("Inode number (from dirent): %i\n", header->dirent->d_ino);
         // my_printf("Inode number (from stat): %i\n", header->stat.st_ino);
 
-        my_printf("%s\n", header->dirent->d_name);
+        if (header->dirent->d_name[0] != '.')
+            my_printf("%s\n", header->dirent->d_name);
         header = header->next;
     }
 }

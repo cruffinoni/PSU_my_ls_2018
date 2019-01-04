@@ -9,6 +9,8 @@ SRC	=	./src/node/folder.c 	\
 		./src/node/file.c 		\
 		./src/parse/flags.c 	\
 		./src/parse/folder.c 	\
+		./src/flags/reverse.c 	\
+		./src/utils/folder.c 	\
 
 MAIN_FILE = ./main.c
 

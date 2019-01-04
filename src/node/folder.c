@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** folder.h
+** folder.c
 ** File description:
 ** Creat, edit or delete any node concersing the folders.
 */
@@ -8,6 +8,7 @@
 #include "my.h"
 #include "ls.h"
 #include "node/file.h"
+#include "utils/folder.h"
 
 static void move_header(t_folder **header, t_folder *new_node)
 {
@@ -19,18 +20,29 @@ static void move_header(t_folder **header, t_folder *new_node)
     *header = new_node;
 }
 
-int add_folder(t_folder **last_node, char *path)
+static int add_paths(t_folder *node, char *path, char *original_path)
+{
+    node->path = my_strdup(path);
+    node->original_path = my_strdup(original_path);
+    if (node->path == NULL || node->original_path == NULL) {
+        if (node->path != NULL)
+            free(node->path);
+        if (node->original_path != NULL)
+            free(node->original_path);
+        free(node);
+        return (ERR_MALLOC);
+    }
+    return (ERR_NONE);
+}
+
+int add_folder(t_folder **last_node, char *path, char *original_path)
 {
     t_folder *new_node = malloc(sizeof(t_folder));
 
     if (new_node == NULL)
         return (ERR_MALLOC);
-    new_node->path = malloc(sizeof(char) * (my_strlen(path) + 1));
-    my_strcpy(new_node->path, path);
-    if (new_node->path == NULL) {
-        free(new_node);
+    if (add_paths(new_node, path, original_path) != ERR_NONE)
         return (ERR_MALLOC);
-    }
     new_node->directory = opendir(path);
     if (new_node->directory == NULL) {
         free(new_node->path);
@@ -40,15 +52,6 @@ int add_folder(t_folder **last_node, char *path)
     move_header(last_node, new_node);
     read_files(new_node);
     return (ERR_NONE);
-}
-
-void display_folders(t_folder *header)
-{
-    while (header != NULL) {
-        my_printf("\x1B[31mFolder '%s':\x1B[0m\n", header->path);
-        display_files(header->hfile);
-        header = header->next;
-    }
 }
 
 void delete_folders(t_folder **last_node)

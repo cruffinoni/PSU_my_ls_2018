@@ -10,7 +10,7 @@
 
 int add_file(t_file **last_node, t_dirent *dirent, t_stat stat);
 int read_files(t_folder *folder);
-void display_files(t_file *header);
+void display_files(t_file *header, t_display_flags flags);
 void free_files(t_file **header);
 
 #endif

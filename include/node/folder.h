@@ -8,8 +8,9 @@
 #ifndef HEADER_SRC_NODE_FOLDER
 #define HEADER_SRC_NODE_FOLDER
 
-int add_folder(t_folder **last_node, char *path);
-void display_folders(t_folder *header);
+int add_folder(t_folder **last_node, char *path, char *original_path);
+void display_folders(t_folder *header, t_display_flags flags);
 void delete_folders(t_folder **last_node);
+int count_folders(t_folder *header);
 
 #endif

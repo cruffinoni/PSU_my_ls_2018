@@ -22,10 +22,12 @@ typedef struct s_file_data {
     t_stat stat;
     struct s_file_data *next;
     struct s_file_data *prev;
+    struct s_folder_data *subf;
 } t_file;
 
 typedef struct s_folder_data {
     char *path;
+    char *original_path;
     DIR *directory;
     struct s_file_data *hfile;
     struct s_folder_data *next;

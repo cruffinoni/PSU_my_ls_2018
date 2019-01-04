@@ -18,7 +18,7 @@ static int check_folder_name(t_folder **ptr, char *name)
         edited_name = my_strdupcat(name, "/");
     else
         edited_name = my_strdup(name);
-    returned_val = add_folder(ptr, edited_name);
+    returned_val = add_folder(ptr, edited_name, name);
     free(edited_name);
     return (returned_val);
 }
@@ -27,10 +27,6 @@ int detect_folders(t_folder **header, char **tab, int argc)
 {
     int returned_val = ERR_NONE;
 
-    if (argc < 2) {
-        add_folder(header, "./");
-        return (ERR_NONE);
-    }
     for (int i = argc - 1; i > 0; i--) {
         if (tab[i][0] != '-')
             returned_val = check_folder_name(header, tab[i]);
@@ -38,6 +34,10 @@ int detect_folders(t_folder **header, char **tab, int argc)
             returned_val = ERR_NONE;
         if (returned_val != ERR_NONE)
             return (returned_val);
+    }
+    if (count_folders(*header) < 1) {
+        add_folder(header, "./", "./");
+        return (ERR_NONE);
     }
     return (ERR_NONE);
 }
