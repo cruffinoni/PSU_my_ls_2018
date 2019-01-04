@@ -9,9 +9,9 @@
 #include "ls.h"
 #include "node.h"
 
-static t_display_flags find_flags(char *str)
+static t_ls_flags find_flags(char *str)
 {
-    t_display_flags flags = 0;
+    t_ls_flags flags = 0;
 
     for (int i = 1; str[i] != '\0'; i++) {
         switch (str[i]) {
@@ -32,9 +32,9 @@ static t_display_flags find_flags(char *str)
     return (flags);
 }
 
-t_display_flags detect_flags(char **tab, int args)
+t_ls_flags detect_flags(char **tab, int args)
 {
-    t_display_flags flags = 0;
+    t_ls_flags flags = 0;
 
     for (int i = 0; i < args; i++) {
         if (tab[i][0] == '-')

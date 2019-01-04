@@ -9,7 +9,7 @@
 #define HEADER_SRC_UTILS_FOLDER
 
 char *get_folder_from_path(char *path);
-void display_folders(t_folder *header, t_display_flags flags);
+void display_folders(t_folder *header, t_ls_flags flags);
 int count_folders(t_folder *header);
 
 #endif

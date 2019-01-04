@@ -40,6 +40,6 @@ typedef enum e_display_flags {
     FLAG_d = 0b100,
     FLAG_r = 0b1000,
     FLAG_t = 0b10000
-} t_display_flags;
+} t_ls_flags;
 
 #endif

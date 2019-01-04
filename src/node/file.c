@@ -7,60 +7,59 @@
 
 #include "my.h"
 #include "ls.h"
+#include "node/folder.h"
 
-int add_file(t_file **last_node, t_dirent *dirent, t_stat stat)
+static int add_file(t_folder *folder, t_dirent *dirent, t_stat stat,
+    t_ls_flags flags, char *path)
 {
     t_file *new_node = malloc(sizeof(t_file));
+    char *ptr = NULL;
 
     if (new_node == NULL)
         return (ERR_MALLOC);
     new_node->stat = stat;
     new_node->dirent = dirent;
-    new_node->next = *last_node;
+    new_node->next = folder->hfile;
     new_node->prev = NULL;
-    if (*last_node != NULL)
-        (*last_node)->prev = new_node;
-    *last_node = new_node;
+    // my_printf("Flags: %b & dirent: %i/%i from: '%s' from '%s'\n", flags, new_node->dirent->d_type, DT_DIR,
+        // folder->path, dirent->d_name);
+    if ((flags & FLAG_R) && new_node->dirent->d_type == DT_DIR && dirent->d_name[0] != '.') {
+        // my_printf("Trying to add the folder: '%s'\n", path);
+        ptr = path;
+        path = my_strdupcat(path, "/");
+        free(ptr);
+        add_folder(&new_node->subf, path, path, flags);
+    }
+    else
+        new_node->subf = NULL;
+    if (folder->hfile != NULL)
+        (folder->hfile)->prev = new_node;
+    folder->hfile = new_node;
+    free(path);
     return (ERR_NONE);
 }
 
-int read_files(t_folder *folder)
+int read_files(t_folder *folder, t_ls_flags flags)
 {
-    t_dirent *current_file = readdir(folder->directory);
-    t_stat current_stat;
+    t_dirent *file = readdir(folder->directory);
+    t_stat file_stat;
     int returned_val = 0;
-    char *new_string = my_strdupcat(folder->path, current_file->d_name);
+    char *new_string = my_strdupcat(folder->path, file->d_name);
 
-    returned_val = stat(new_string, &current_stat);
-    // printf("Reading file from: '%s' w/ %p & %i\n", new_string, current_file, returned_val);
-    while (current_file != NULL && returned_val != -1) {
-        if (add_file(&folder->hfile, current_file, current_stat) != ERR_NONE)
+    // printf("The original path is: '%s' + '%s' = '%s'\n", folder->path, file->d_name, new_string);
+    returned_val = stat(new_string, &file_stat);
+    while (file != NULL && returned_val != -1) {
+        if (add_file(folder, file, file_stat, flags, new_string) != ERR_NONE)
             return (ERR_MALLOC);
-        current_file = readdir(folder->directory);
-        free(new_string);
-        if (current_file != NULL) {
-            new_string = my_strdupcat(folder->path, current_file->d_name);
+        file = readdir(folder->directory);
+        if (file != NULL) {
+            new_string = my_strdupcat(folder->path, file->d_name);
             if (new_string == NULL)
                 return (ERR_MALLOC);
-            returned_val = stat(new_string, &current_stat);
+            returned_val = stat(new_string, &file_stat);
         }
     }
     return (ERR_NONE);
-}
-
-void display_files(t_file *header, t_display_flags flags)
-{
-    while (header != NULL) {
-        // my_printf("\nFile's name: '%s'\n", header->dirent->d_name);
-        // my_printf("Last modification: %i\n", header->stat.st_mtime);
-        // my_printf("File size: %i bytes\n", header->stat.st_size);
-        // my_printf("Inode number (from dirent): %i\n", header->dirent->d_ino);
-        // my_printf("Inode number (from stat): %i\n", header->stat.st_ino);
-
-        if (header->dirent->d_name[0] != '.')
-            my_printf("%s\n", header->dirent->d_name);
-        header = header->next;
-    }
 }
 
 void free_files(t_file **header)

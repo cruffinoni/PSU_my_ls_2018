@@ -16,13 +16,16 @@ int count_folders(t_folder *header)
     int return_val = 0;
 
     while (header != NULL) {
-        return_val++;
+        if (header->hfile != NULL)
+            return_val += 2;
+        else
+            return_val++;
         header = header->next;
     }
     return (return_val);
 }
 
-void display_folders(t_folder *header, t_display_flags flags)
+void display_folders(t_folder *header, t_ls_flags flags)
 {
     int total_folders = count_folders(header);
 
@@ -31,5 +34,7 @@ void display_folders(t_folder *header, t_display_flags flags)
             my_printf("\x1B[31m%s:\x1B[0m\n", header->original_path);
         display_files(header->hfile, flags);
         header = header->next;
+        if (header != NULL)
+            my_putchar('\n');
     }
 }

@@ -15,7 +15,7 @@ static void move_header(t_folder **header, t_folder *new_node)
     new_node->next = *header;
     new_node->prev = NULL;
     new_node->hfile = NULL;
-    if (*header != NULL)
+    if ((*header) != NULL)
         (*header)->prev = new_node;
     *header = new_node;
 }
@@ -35,7 +35,8 @@ static int add_paths(t_folder *node, char *path, char *original_path)
     return (ERR_NONE);
 }
 
-int add_folder(t_folder **last_node, char *path, char *original_path)
+int add_folder(t_folder **last_node, char *path, char *original_path,
+    t_ls_flags flags)
 {
     t_folder *new_node = malloc(sizeof(t_folder));
 
@@ -50,7 +51,7 @@ int add_folder(t_folder **last_node, char *path, char *original_path)
         return (ERR_FOLDER);
     }
     move_header(last_node, new_node);
-    read_files(new_node);
+    read_files(new_node, flags);
     return (ERR_NONE);
 }
 
@@ -61,6 +62,7 @@ void delete_folders(t_folder **last_node)
     while (next_node != NULL) {
         next_node = (*last_node)->next;
         free_files(&(*last_node)->hfile);
+        free((*last_node)->original_path);
         free((*last_node)->path);
         closedir((*last_node)->directory);
         free(*last_node);
