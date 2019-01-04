@@ -12,6 +12,6 @@ int add_folder(t_folder **last_node, char *path, char *original_path,
     t_ls_flags flags);
 void display_folders(t_folder *header, t_ls_flags flags);
 void delete_folders(t_folder **last_node);
-int count_folders(t_folder *header);
+int count_folder(t_folder *header);
 
 #endif

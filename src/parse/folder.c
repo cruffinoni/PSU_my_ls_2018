@@ -35,9 +35,7 @@ int detect_folders(t_folder **header, t_ls_flags flags, char **tab, int argc)
         if (returned_val != ERR_NONE)
             return (returned_val);
     }
-    if (count_folders(*header) < 1) {
+    if (count_folder(*header) < 1)
         add_folder(header, "./", "./", flags);
-        return (ERR_NONE);
-    }
     return (ERR_NONE);
 }

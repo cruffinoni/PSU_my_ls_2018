@@ -10,6 +10,6 @@
 
 char *get_folder_from_path(char *path);
 void display_folders(t_folder *header, t_ls_flags flags);
-int count_folders(t_folder *header);
+int count_folder(t_folder *header);
 
 #endif

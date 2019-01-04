@@ -7,19 +7,26 @@
 
 #include "my.h"
 #include "ls.h"
-#include "node/file.h"
+#include "node.h"
 
-// /home/cruffinoni/delivery/PSU/PSU_my_ls_2018/
+static int count_folder_from_file(t_file *first_file)
+{
+    int count = 0;
 
-int count_folders(t_folder *header)
+    while (first_file != NULL) {
+        if (first_file->subf != NULL)
+            count++;
+        first_file = first_file->next;
+    }
+    return (count);
+}
+
+int count_folder(t_folder *header)
 {
     int return_val = 0;
 
     while (header != NULL) {
-        if (header->hfile != NULL)
-            return_val += 2;
-        else
-            return_val++;
+        return_val += count_folder_from_file(header->hfile) + 1;
         header = header->next;
     }
     return (return_val);
@@ -27,10 +34,10 @@ int count_folders(t_folder *header)
 
 void display_folders(t_folder *header, t_ls_flags flags)
 {
-    int total_folders = count_folders(header);
+    int total_folders = count_folder(header);
 
     while (header != NULL) {
-        if (total_folders >= 2)
+        if (total_folders >= 2 || (flags & FLAG_R))
             my_printf("\x1B[31m%s:\x1B[0m\n", header->original_path);
         display_files(header->hfile, flags);
         header = header->next;
