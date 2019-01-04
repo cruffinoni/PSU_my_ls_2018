@@ -16,8 +16,7 @@
 typedef struct stat t_stat;
 typedef struct dirent t_dirent;
 
-typedef struct s_file_data
-{
+typedef struct s_file_data {
     char *path;
     t_dirent *dirent;
     t_stat stat;
@@ -25,13 +24,20 @@ typedef struct s_file_data
     struct s_file_data *prev;
 } t_file;
 
-typedef struct s_folder_data
-{
+typedef struct s_folder_data {
     char *path;
     DIR *directory;
     struct s_file_data *hfile;
     struct s_folder_data *next;
     struct s_folder_data *prev;
 } t_folder;
+
+typedef enum e_display_flags {
+    FLAG_l = 0b1,
+    FLAG_R = 0b10,
+    FLAG_d = 0b100,
+    FLAG_r = 0b1000,
+    FLAG_t = 0b10000
+} t_display_flags;
 
 #endif

@@ -5,8 +5,10 @@
 ## This file is used for compliation of src and lib
 ##
 
-SRC	=	./src/node/folder.c \
-		./src/node/file.c
+SRC	=	./src/node/folder.c 	\
+		./src/node/file.c 		\
+		./src/parse/flags.c 	\
+		./src/parse/folder.c 	\
 
 MAIN_FILE = ./main.c
 
