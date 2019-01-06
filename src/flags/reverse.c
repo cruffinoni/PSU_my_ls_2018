@@ -7,7 +7,6 @@
 
 #include "my.h"
 #include "ls.h"
-#include "flags/reverse.h"
 #include "node/file.h"
 
 static void reverse_folder_order(t_folder **header)

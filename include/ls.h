@@ -28,6 +28,7 @@ typedef struct s_file_data {
 typedef struct s_folder_data {
     char *path;
     char *original_path;
+    t_stat stat;
     DIR *directory;
     struct s_file_data *hfile;
     struct s_folder_data *next;

@@ -10,6 +10,7 @@
 #include "node.h"
 #include "parse.h"
 #include "flags/reverse.h"
+#include "flags/time.h"
 
 int main(int ac, char **av)
 {
@@ -19,8 +20,10 @@ int main(int ac, char **av)
     flags = detect_flags(av, ac);
     if (detect_folders(&header, flags, av, ac) != ERR_NONE)
         return (84);
+    if (flags & FLAG_t)
+        sort_by_time(&header);
     if (flags & FLAG_r)
-        reverse_all_folder_content(&header);
+        sort_by_time(&header);
     display_folders(header, flags);
     delete_folders(&header);
     return (0);

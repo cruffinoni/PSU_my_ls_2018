@@ -8,8 +8,8 @@
 #ifndef HEADER_SRC_UTILS_FOLDER
 #define HEADER_SRC_UTILS_FOLDER
 
-char *get_folder_from_path(char *path);
 void display_folders(t_folder *header, t_ls_flags flags);
 int count_folder(t_folder *header);
+void swap_node_folder(t_folder *node_a, t_folder *node_b);
 
 #endif

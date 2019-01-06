@@ -21,6 +21,18 @@ static int count_folder_from_file(t_file *first_file)
     return (count);
 }
 
+void swap_node_folder(t_folder *node_a, t_folder *node_b)
+{
+    node_a->next = node_b->next;
+    node_b->prev = node_a->prev;
+    if (node_a->next != NULL)
+        node_a->next->prev = node_a;
+    if (node_b->prev != NULL)
+        node_b->prev->next = node_b;
+    node_a->prev = node_b;
+    node_b->next = node_a;
+}
+
 int count_folder(t_folder *header)
 {
     int return_val = 0;

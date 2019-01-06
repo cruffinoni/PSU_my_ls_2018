@@ -5,6 +5,7 @@
 ** Creat, edit or delete any node concersing the folders.
 */
 
+#include <stdio.h>
 #include "my.h"
 #include "ls.h"
 #include "node/file.h"
@@ -32,6 +33,12 @@ static int add_paths(t_folder *node, char *path, char *original_path)
         free(node);
         return (ERR_MALLOC);
     }
+    if (stat(node->path, &node->stat) < 0) {
+        free(node->path);
+        free(node->original_path);
+        free(node);
+        return (ERR_MALLOC);
+    }
     return (ERR_NONE);
 }
 
@@ -46,6 +53,7 @@ int add_folder(t_folder **last_node, char *path, char *original_path,
         return (ERR_MALLOC);
     new_node->directory = opendir(path);
     if (new_node->directory == NULL) {
+        perror("add_folder");
         free(new_node->path);
         free(new_node);
         return (ERR_FOLDER);
