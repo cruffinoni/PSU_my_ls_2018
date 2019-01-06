@@ -21,9 +21,9 @@ int main(int ac, char **av)
     if (detect_folders(&header, flags, av, ac) != ERR_NONE)
         return (84);
     if (flags & FLAG_t)
-        sort_by_time(&header);
+        sort_by_time(&header, flags);
     if (flags & FLAG_r)
-        sort_by_time(&header);
+        reverse_all_folder_content(&header);
     display_folders(header, flags);
     delete_folders(&header);
     return (0);

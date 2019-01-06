@@ -9,7 +9,6 @@
 #define HEADER_SRC_NODE_FILE
 
 int read_files(t_folder *folder, t_ls_flags flags);
-void display_files(t_file *header, t_ls_flags flags);
 void free_files(t_file **header);
 
 #endif

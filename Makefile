@@ -5,14 +5,16 @@
 ## This file is used for compliation of src and lib
 ##
 
-SRC	=	./src/node/folder.c 	\
-		./src/node/file.c 		\
-		./src/parse/flags.c 	\
-		./src/parse/folder.c 	\
-		./src/flags/reverse.c 	\
-		./src/flags/time.c 		\
-		./src/utils/folder.c 	\
-		./src/utils/file.c 		\
+SRC	=	./src/node/folder.c 			\
+		./src/node/file.c 				\
+		./src/parse/flags.c 			\
+		./src/parse/folder.c 			\
+		./src/flags/reverse.c 			\
+		./src/flags/time.c 				\
+		./src/flags/time/file.c 		\
+		./src/flags/time/folder.c 		\
+		./src/utils/folder.c 			\
+		./src/utils/file.c 				\
 
 MAIN_FILE = ./main.c
 

@@ -8,6 +8,10 @@
 #ifndef HEADER_SRC_FLAGS_TIME
 #define HEADER_SRC_FLAGS_TIME
 
-void sort_by_time(t_folder **header);
+#include "ls.h"
+#include "flags/time/folder.h"
+#include "flags/time/file.h"
+
+void sort_by_time(t_folder **header, t_ls_flags flag);
 
 #endif

@@ -8,6 +8,7 @@
 #include "my.h"
 #include "ls.h"
 #include "node.h"
+#include "utils/file.h"
 
 static int count_folder_from_file(t_file *first_file)
 {

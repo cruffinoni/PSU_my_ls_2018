@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** folder.c
 ** File description:
-** Utils functions for manipulating folders..
+** Utils functions for manipulating folders.
 */
 
 #ifndef HEADER_SRC_UTILS_FOLDER
