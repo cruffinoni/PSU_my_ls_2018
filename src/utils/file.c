@@ -30,11 +30,10 @@ static void print_file(t_file *file, t_ls_flags flags, size_t bigger_size)
 {
     if (file->dirent->d_name[0] == '.')
         return;
-    if (flags & FLAG_l) {
+    if (flags & FLAG_l)
         print_long_format(file, bigger_size);
-    }
     else if (file->dirent->d_type == DT_DIR)
-        my_printf("\x1B[32m%s\x1B[0m\n", file->dirent->d_name);
+        my_printf(COLOR_FOLDER"%s"COLOR_NORMAL"\n", file->dirent->d_name);
     else
         my_printf("%s\n", file->dirent->d_name);
 }

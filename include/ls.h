@@ -8,6 +8,12 @@
 #ifndef HEADER_SRC_MY_LS
 #define HEADER_SRC_MY_LS
 
+#ifndef COLOR_FOLDER
+    #define COLOR_FOLDER    "\x1B[32m"
+    #define COLOR_NORMAL    "\x1B[0m"
+    #define COLOR_TITLE     "\x1B[31m"
+#endif
+
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/stat.h>

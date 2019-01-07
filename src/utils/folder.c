@@ -66,7 +66,7 @@ void display_folders(t_folder *header, t_ls_flags flags)
 
     while (header != NULL) {
         if (total_folders >= 2 || (flags & FLAG_R))
-            my_printf("\x1B[31m%s:\x1B[0m\n", header->original_path);
+            my_printf(COLOR_TITLE"%s:"COLOR_NORMAL"\n", header->original_path);
         if (flags & FLAG_l)
             my_printf("total %li\n", get_folder_size(header->hfile));
         display_files(header->hfile, flags);
