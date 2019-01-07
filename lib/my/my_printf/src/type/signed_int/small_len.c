@@ -54,10 +54,13 @@ int type_short(va_list args, t_local_spe specifier_infos)
 
 int type_int(va_list args, t_local_spe specifier_infos)
 {
-    int var = va_arg(args, int);
+    int var = 0;
     int count = var < 0 ? 1 : 0;
     int lnb = 0;
 
+    if ((specifier_infos.flags_extra & EXTRAF_STAR) == EXTRAF_STAR)
+        specifier_infos.precision += va_arg(args, int);
+    var = va_arg(args, int);
     if (count == 1) {
         specifier_infos.flags |= FLAG_IS_NEGATIVE;
         var *= -1;

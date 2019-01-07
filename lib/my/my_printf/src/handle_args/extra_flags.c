@@ -24,6 +24,8 @@ void parse_extra_flags(char const *src, int *index, t_local_spe *specifier)
                 break;
             case ' ': specifier->flags_extra |= EXTRAF_SPACE;
                 break;
+            case '*': specifier->flags_extra |= EXTRAF_STAR;
+                break;
             default: return;
         }
         *index = *index + 1;

@@ -10,6 +10,7 @@ SRC	=	./src/node/folder.c 			\
 		./src/parse/flags.c 			\
 		./src/parse/folder.c 			\
 		./src/flags/reverse.c 			\
+		./src/flags/long.c 				\
 		./src/flags/time.c 				\
 		./src/flags/time/file.c 		\
 		./src/flags/time/folder.c 		\

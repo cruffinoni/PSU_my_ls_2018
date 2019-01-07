@@ -8,17 +8,35 @@
 #include <time.h>
 #include "my.h"
 #include "ls.h"
+#include "flags/long.h"
 #include "utils/folder.h"
 
-static void print_file(t_file *file)
+static size_t get_bigger_file(t_file *file)
 {
-    if (file->dirent->d_name[0] != '.') {
-        // char *date = ctime(&file->stat.st_mtime);
-        if (file->dirent->d_type == DT_DIR)
-            my_printf("\x1B[32m%s\x1B[0m\n", file->dirent->d_name);
-        else
-            my_printf("%s\n", file->dirent->d_name);
+    size_t max_size = 0;
+    size_t size = 0;
+
+    while (file != NULL) {
+        if (file->dirent->d_name[0] != '.')
+            size = int_strlen(file->stat.st_size);
+        if (size > max_size)
+            max_size = size;
+        file = file->next;
     }
+    return (max_size);
+}
+
+static void print_file(t_file *file, t_ls_flags flags, size_t bigger_size)
+{
+    if (file->dirent->d_name[0] == '.')
+        return;
+    if (flags & FLAG_l) {
+        print_long_format(file, bigger_size);
+    }
+    else if (file->dirent->d_type == DT_DIR)
+        my_printf("\x1B[32m%s\x1B[0m\n", file->dirent->d_name);
+    else
+        my_printf("%s\n", file->dirent->d_name);
 }
 
 int count_file(t_file *header)
@@ -26,7 +44,6 @@ int count_file(t_file *header)
     int return_val = 0;
 
     while (header != NULL) {
-        // if (header->dirent->d_name[0] != '.' && header->subf == NULL)
         return_val++;
         header = header->next;
     }
@@ -48,9 +65,10 @@ void swap_node_file(t_file *node_a, t_file *node_b)
 void display_files(t_file *header, t_ls_flags flags)
 {
     t_file *base = header;
+    size_t bigger_size = get_bigger_file(header);
 
     while (header != NULL) {
-        print_file(header);
+        print_file(header, flags, bigger_size);
         header = header->next;
     }
     while (base != NULL) {

@@ -5,6 +5,7 @@
 ** Utils functions for manipulating folders..
 */
 
+#include <stddef.h>
 #include "my.h"
 #include "ls.h"
 #include "node.h"
@@ -20,6 +21,20 @@ static int count_folder_from_file(t_file *first_file)
         first_file = first_file->next;
     }
     return (count);
+}
+
+static size_t get_folder_size(t_file *header)
+{
+    size_t total = 0;
+
+    while (header != NULL) {
+        if (header->dirent->d_name[0] != '.') {
+            total += (header->stat.st_size + header->stat.st_blksize - 1) /
+                header->stat.st_blksize * (header->stat.st_blksize / 1024);
+        }
+        header = header->next;
+    }
+    return (total);
 }
 
 void swap_node_folder(t_folder *node_a, t_folder *node_b)
@@ -52,6 +67,8 @@ void display_folders(t_folder *header, t_ls_flags flags)
     while (header != NULL) {
         if (total_folders >= 2 || (flags & FLAG_R))
             my_printf("\x1B[31m%s:\x1B[0m\n", header->original_path);
+        if (flags & FLAG_l)
+            my_printf("total %li\n", get_folder_size(header->hfile));
         display_files(header->hfile, flags);
         header = header->next;
         if (header != NULL)

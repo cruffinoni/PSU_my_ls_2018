@@ -8,6 +8,8 @@
 #ifndef MY_HEADER_INCLUDE
 #define MY_HEADER_INCLUDE
 
+#include <stddef.h>
+
 int my_putchar(char c);
 int my_isneg(int nb);
 int my_put_nbr(int nb);
@@ -48,5 +50,6 @@ int my_isalphanumeric(char c);
 int my_strtol(char *str, char **endptr);
 int my_printf(char const *src, ...);
 char *my_strdupcat(char *origin, char *to_add);
+size_t int_strlen(int number);
 
 #endif

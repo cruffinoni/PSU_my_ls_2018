@@ -1,0 +1,15 @@
+/*
+** EPITECH PROJECT, 2018
+** long.h
+** File description:
+** 'l' flag also known as long listing format
+*/
+
+#ifndef HEADER_SRC_FLAGS_LONG
+#define HEADER_SRC_FLAGS_LONG
+
+#include "ls.h"
+
+void print_long_format(t_file *file, int longer_size);
+
+#endif
