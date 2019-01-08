@@ -26,7 +26,7 @@ static size_t get_bigger_file(t_file *file)
     return (max_size);
 }
 
-static void print_file(t_file *file, t_ls_flags flags, size_t bigger_size)
+static void print_file(t_file *file, t_flags flags, size_t bigger_size)
 {
     if (file->dirent->d_name[0] == '.')
         return;
@@ -61,7 +61,7 @@ void swap_node_file(t_file *node_a, t_file *node_b)
     node_b->next = node_a;
 }
 
-void display_files(t_file *header, t_ls_flags flags)
+void display_files(t_file *header, t_flags flags)
 {
     t_file *base = header;
     size_t bigger_size = get_bigger_file(header);

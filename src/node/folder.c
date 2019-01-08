@@ -37,23 +37,24 @@ static int add_paths(t_folder *node, char *path, char *original_path)
         free(node->path);
         free(node->original_path);
         free(node);
-        return (ERR_MALLOC);
+        return (ERR_FOLDER);
     }
     return (ERR_NONE);
 }
 
 int add_folder(t_folder **last_node, char *path, char *original_path,
-    t_ls_flags flags)
+    t_flags flags)
 {
     t_folder *new_node = malloc(sizeof(t_folder));
+    int returned_val = 0;
 
     if (new_node == NULL)
         return (ERR_MALLOC);
-    if (add_paths(new_node, path, original_path) != ERR_NONE)
-        return (ERR_MALLOC);
+    returned_val = add_paths(new_node, path, original_path);
+    if (returned_val != ERR_NONE)
+        return (returned_val);
     new_node->directory = opendir(path);
     if (new_node->directory == NULL) {
-        perror("add_folder");
         free(new_node->path);
         free(new_node);
         return (ERR_FOLDER);

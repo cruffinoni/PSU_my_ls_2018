@@ -10,6 +10,6 @@
 
 #include "ls.h"
 
-void sort_file_by_time(t_file **header, int total_file, t_ls_flags flag);
+void sort_file_by_time(t_file **header, int total_file, t_flags flag);
 
 #endif

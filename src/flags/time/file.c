@@ -9,7 +9,7 @@
 #include "utils/file.h"
 #include "flags/time.h"
 
-static void find_folder_by_file(t_file **header, t_ls_flags flag)
+static void find_folder_by_file(t_file **header, t_flags flag)
 {
     t_file *current = *header;
 
@@ -31,7 +31,7 @@ static int check_swap_file(t_file **header, t_file *current)
     return (0);
 }
 
-void sort_file_by_time(t_file **header, int total_file, t_ls_flags flag)
+void sort_file_by_time(t_file **header, int total_file, t_flags flag)
 {
     t_file *next_node = *header;
     t_file *current = *header;

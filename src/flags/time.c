@@ -11,7 +11,7 @@
 #include "utils/file.h"
 #include "flags/time.h"
 
-void sort_by_time(t_folder **header, t_ls_flags flag)
+void sort_by_time(t_folder **header, t_flags flag)
 {
     t_folder *current = *header;
 

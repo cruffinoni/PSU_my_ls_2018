@@ -9,6 +9,6 @@
 #define HEADER_SRC_PARSE_FLAGS
 
 
-t_ls_flags detect_flags(char **tab, int args);
+t_flags detect_flags(char **tab, int args);
 
 #endif

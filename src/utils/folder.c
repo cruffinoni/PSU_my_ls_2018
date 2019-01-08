@@ -60,12 +60,12 @@ int count_folder(t_folder *header)
     return (return_val);
 }
 
-void display_folders(t_folder *header, t_ls_flags flags)
+void display_folders(t_folder *header, t_flags flags)
 {
     int total_folders = count_folder(header);
 
     while (header != NULL) {
-        if (total_folders >= 2 || (flags & FLAG_R))
+        if (total_folders >= 2 || (flags & FLAG_R) || (flags & FLAGI_f))
             my_printf(COLOR_TITLE"%s:"COLOR_NORMAL"\n", header->original_path);
         if (flags & FLAG_l)
             my_printf("total %li\n", get_folder_size(header->hfile));

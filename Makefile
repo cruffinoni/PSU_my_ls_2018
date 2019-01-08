@@ -16,6 +16,7 @@ SRC	=	./src/node/folder.c 			\
 		./src/flags/time/folder.c 		\
 		./src/utils/folder.c 			\
 		./src/utils/file.c 				\
+		./src/utils/str_manipulation.c 	\
 
 MAIN_FILE = ./main.c
 
@@ -33,7 +34,7 @@ OBJ	=	$(SRC:.c=.o)
 OBJ_MAIN = $(MAIN_FILE:.c=.o)
 
 $(NAME): compile_lib $(OBJ) $(OBJ_MAIN)
-		gcc -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) -g
+		gcc -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS)
 
 all: $(NAME)
 

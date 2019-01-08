@@ -11,5 +11,6 @@
 #define ERR_MALLOC      (-1)
 #define ERR_NONE        (0)
 #define ERR_FOLDER      (1)
+#define ERR_INIT        (84)
 
 #endif
