@@ -50,4 +50,10 @@ typedef enum e_display_flags {
     FLAGI_f = 0b100000
 } t_flags;
 
+typedef struct s_long_format_size
+{
+    size_t nblink;
+    size_t size;
+} t_format_size;
+
 #endif

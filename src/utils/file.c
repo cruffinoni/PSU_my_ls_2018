@@ -26,12 +26,27 @@ static size_t get_bigger_file(t_file *file)
     return (max_size);
 }
 
-static void print_file(t_file *file, t_flags flags, size_t bigger_size)
+static size_t get_bigger_nblk(t_file *file)
+{
+    size_t max_size = 0;
+    size_t size = 0;
+
+    while (file != NULL) {
+        if (file->dirent->d_name[0] != '.')
+            size = int_strlen(file->stat.st_nlink);
+        if (size > max_size)
+            max_size = size;
+        file = file->next;
+    }
+    return (max_size);
+}
+
+static void print_file(t_file *file, t_flags flags, t_format_size size)
 {
     if (file->dirent->d_name[0] == '.')
         return;
     if (flags & FLAG_l)
-        print_long_format(file, bigger_size);
+        print_long_format(file, size);
     else if (file->dirent->d_type == DT_DIR)
         my_printf(COLOR_FOLDER"%s"COLOR_NORMAL"\n", file->dirent->d_name);
     else
@@ -64,10 +79,10 @@ void swap_node_file(t_file *node_a, t_file *node_b)
 void display_files(t_file *header, t_flags flags)
 {
     t_file *base = header;
-    size_t bigger_size = get_bigger_file(header);
+    t_format_size size = {get_bigger_nblk(header), get_bigger_file(header)};
 
     while (header != NULL) {
-        print_file(header, flags, bigger_size);
+        print_file(header, flags, size);
         header = header->next;
     }
     while (base != NULL) {

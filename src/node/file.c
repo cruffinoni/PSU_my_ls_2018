@@ -32,6 +32,7 @@ int add_file(t_folder *folder, t_dirent *dirent, t_flags flags, char *path)
 
     if (new_node == NULL)
         return (ERR_MALLOC);
+    new_node->path = my_strdup(path);
     stat(path, &new_node->stat);
     new_node->dirent = dirent;
     if (add_subfolder(flags, new_node, path) != ERR_NONE) {
@@ -82,7 +83,8 @@ int add_manually_file(t_folder *ptr, DIR *dir, char *folder, t_flags flags)
         }
         file = readdir(dir);
     }
-    return (ERR_NONE);
+    my_putstr(folder);
+    return (ERR_FILE);
 }
 
 void free_files(t_file **header)
@@ -93,6 +95,7 @@ void free_files(t_file **header)
         next_node = (*header)->next;
         if ((*header)->subf != NULL)
             delete_folders(&(*header)->subf);
+        free((*header)->path);
         free(*header);
         *header = next_node;
     }

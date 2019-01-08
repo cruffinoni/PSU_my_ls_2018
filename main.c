@@ -42,8 +42,10 @@ int main(int ac, char **av)
     if (inline_file == NULL)
         return (ERR_INIT);
     flags = detect_flags(av, ac);
-    if (detect_folders(&header, &inline_file, &flags, av, ac) != ERR_NONE)
+    if (detect_folders(&header, &inline_file, &flags, av, ac) != ERR_NONE) {
+        perror("init");
         return (ERR_INIT);
+    }
     operand_flags(&header, &inline_file, flags);
     display_results(&header, &inline_file, flags);
     delete_folders(&header);

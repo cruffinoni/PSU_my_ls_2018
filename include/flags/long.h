@@ -10,6 +10,6 @@
 
 #include "ls.h"
 
-void print_long_format(t_file *file, int longer_size);
+void print_long_format(t_file *file, t_format_size bsize);
 
 #endif

@@ -44,8 +44,9 @@ static int check_folder_name(t_folder **ptr, t_folder *file,
     returned_val = add_folder(ptr, edited_name, name, *flags);
     free(edited_name);
     if (returned_val == ERR_FOLDER) {
-        if (try_add_file(file, name, *flags) != ERR_NONE)
-            return (ERR_MALLOC);
+        returned_val = try_add_file(file, name, *flags);
+        if (returned_val != ERR_NONE)
+            return (returned_val);
         *flags |= FLAGI_f;
     }
     return (returned_val);
@@ -62,7 +63,7 @@ int detect_folders(t_folder **folder, t_folder **file,
     for (int i = argc - 1; i > 0; i--) {
         if (tab[i][0] != '-')
             returned_val = check_folder_name(folder, *file, tab[i], flags);
-        if (returned_val == ERR_MALLOC)
+        if (returned_val == ERR_MALLOC || returned_val == ERR_FILE)
             return (returned_val);
     }
     if (count_folder(*folder) < 1 && (*file)->hfile == NULL)
