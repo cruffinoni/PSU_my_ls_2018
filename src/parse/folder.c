@@ -13,19 +13,19 @@
 static int try_add_file(t_folder *file, char *name, t_flags flags)
 {
     char *edited_name = return_directory(name);
-    DIR *directory = NULL;
     int returned_val = ERR_NONE;
 
     if (edited_name == NULL)
         return (ERR_MALLOC);
-    directory = opendir(edited_name);
-    if (directory == NULL) {
+    file->directory = opendir(edited_name);
+    if (file->directory == NULL) {
         free(edited_name);
         return (ERR_MALLOC);
     }
-    returned_val = add_manually_file(file, directory, name, flags);
-    closedir(directory);
+    flags |= FLAGI_af;
+    returned_val = add_manually_file(file, file->directory, name, flags);
     free(edited_name);
+    flags = ~FLAGI_af;
     if (returned_val != ERR_NONE)
         return (ERR_MALLOC);
     return (ERR_NONE);
@@ -60,6 +60,7 @@ int detect_folders(t_folder **folder, t_folder **file,
     (*file)->next = NULL;
     (*file)->prev = NULL;
     (*file)->hfile = NULL;
+    (*file)->directory = NULL;
     for (int i = argc - 1; i > 0; i--) {
         if (tab[i][0] != '-')
             returned_val = check_folder_name(folder, *file, tab[i], flags);

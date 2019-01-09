@@ -15,6 +15,7 @@ static int add_subfolder(t_flags flags, t_file *node, char *path)
     char *ptr = NULL;
 
     node->subf = NULL;
+    node->parent_dir = NULL;
     if ((flags & FLAG_R) && node->dirent->d_type == DT_DIR &&
         node->dirent->d_name[0] != '.') {
         ptr = my_strdupcat(path, "/");
@@ -39,6 +40,8 @@ int add_file(t_folder *folder, t_dirent *dirent, t_flags flags, char *path)
         free(new_node);
         return (ERR_MALLOC);
     }
+    if (flags & FLAGI_af)
+        new_node->parent_dir = folder->directory;
     new_node->next = folder->hfile;
     new_node->prev = NULL;
     if (folder->hfile != NULL)
@@ -95,6 +98,8 @@ void free_files(t_file **header)
         next_node = (*header)->next;
         if ((*header)->subf != NULL)
             delete_folders(&(*header)->subf);
+        if ((*header)->parent_dir != NULL)
+            closedir((*header)->parent_dir);
         free((*header)->path);
         free(*header);
         *header = next_node;
