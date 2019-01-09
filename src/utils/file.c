@@ -11,7 +11,7 @@
 #include "flags/long.h"
 #include "utils/folder.h"
 
-static size_t get_bigger_file(t_file *file)
+size_t get_bigger_file(t_file *file)
 {
     size_t max_size = 0;
     size_t size = 0;
@@ -26,7 +26,7 @@ static size_t get_bigger_file(t_file *file)
     return (max_size);
 }
 
-static size_t get_bigger_nblk(t_file *file)
+size_t get_bigger_nblk(t_file *file)
 {
     size_t max_size = 0;
     size_t size = 0;
@@ -47,10 +47,7 @@ static void print_file(t_file *file, t_flags flags, t_format_size size)
         return;
     if (flags & FLAG_l)
         print_long_format(file, size);
-    else if (file->dirent->d_type == DT_DIR)
-        my_printf("%s\n", file->dirent->d_name);
-    else
-        my_printf("%s\n", file->dirent->d_name);
+    my_printf("%s\n", file->dirent->d_name);
 }
 
 int count_file(t_file *header)

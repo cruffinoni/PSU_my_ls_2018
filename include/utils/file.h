@@ -11,5 +11,8 @@
 void display_files(t_file *header, t_flags flags);
 void swap_node_file(t_file *node_a, t_file *node_b);
 int count_file(t_file *header);
+size_t get_bigger_file(t_file *file)
+size_t get_bigger_nblk(t_file *file);
+
 
 #endif

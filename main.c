@@ -11,6 +11,7 @@
 #include "parse.h"
 #include "flags/reverse.h"
 #include "flags/time.h"
+#include "flags/directory.h"
 #include "utils/file.h"
 
 static void operand_flags(t_folder **main, t_folder **file, t_flags flags)
@@ -27,6 +28,11 @@ static void operand_flags(t_folder **main, t_folder **file, t_flags flags)
 
 static void display_results(t_folder **main, t_folder **file, t_flags flags)
 {
+    if (flags & FLAG_d) {
+        display_files_title((*file)->hfile, flags);
+        display_folders_title(*main);
+        return;
+    }
     display_files((*file)->hfile, flags);
     if ((*file)->hfile != NULL && *main != NULL)
         my_putchar('\n');
@@ -51,5 +57,5 @@ int main(int ac, char **av)
     delete_folders(&header);
     free_files(&inline_file->hfile);
     free(inline_file);
-    return (0);
+    return (ERR_NONE);
 }

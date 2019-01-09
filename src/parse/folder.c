@@ -68,6 +68,6 @@ int detect_folders(t_folder **folder, t_folder **file,
             return (returned_val);
     }
     if (count_folder(*folder) < 1 && (*file)->hfile == NULL)
-        add_folder(folder, "./", "./", *flags);
+        add_folder(folder, "./", ".", *flags);
     return (ERR_NONE);
 }
