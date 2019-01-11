@@ -47,7 +47,8 @@ static void print_file(t_file *file, t_flags flags, t_format_size size)
         return;
     if (flags & FLAG_l)
         print_long_format(file, size);
-    my_printf("%s\n", file->dirent->d_name);
+    else
+        my_printf("%s\n", file->dirent->d_name);
 }
 
 int count_file(t_file *header)

@@ -11,6 +11,6 @@
 #include "ls.h"
 
 void display_files_title(t_file *header, t_flags flags);
-void display_folders_title(t_file *header);
+void display_folders_title(t_folder *header);
 
 #endif

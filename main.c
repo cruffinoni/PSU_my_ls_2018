@@ -5,6 +5,7 @@
 ** Main file for the project my_ls.
 */
 
+#include <string.h>
 #include "my.h"
 #include "ls.h"
 #include "node.h"
@@ -49,7 +50,7 @@ int main(int ac, char **av)
         return (ERR_INIT);
     flags = detect_flags(av, ac);
     if (detect_folders(&header, &inline_file, &flags, av, ac) != ERR_NONE) {
-        perror("init");
+        strerror(errno);
         return (ERR_INIT);
     }
     operand_flags(&header, &inline_file, flags);

@@ -53,7 +53,12 @@ static int format_folder_name(t_file *file, char *date, t_format_size bsize)
     if (ginfo == NULL || pinfo == NULL)
         return (ERR_MALLOC);
     print_file_permissions(file);
-    my_printf(" %*i %s %s %*i %s %s", bsize.nblink,
+    if (file->dirent->d_type == DT_DIR)
+        my_printf(" %*i %s %s %*i %s \x1B[32m%s\x1B[0m", bsize.nblink,
+        file->stat.st_nlink, ginfo->gr_name, pinfo->pw_name, bsize.size,
+        file->stat.st_size, date, file->dirent->d_name);
+    else
+        my_printf(" %*i %s %s %*i %s %s", bsize.nblink,
         file->stat.st_nlink, ginfo->gr_name, pinfo->pw_name, bsize.size,
         file->stat.st_size, date, file->dirent->d_name);
     return (ERR_NONE);
