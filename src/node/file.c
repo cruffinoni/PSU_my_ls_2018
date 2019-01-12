@@ -80,7 +80,7 @@ int add_manually_file(t_folder *ptr, DIR *dir, char *folder, t_flags flags)
     char *f_name = get_file_name(folder);
 
     while (file != NULL) {
-        if (!my_strcmp(file->d_name, f_name)) {
+        if (!my_strcmp(file->d_name, f_name) && file->d_type != DT_DIR) {
             free(f_name);
             return (add_file(ptr, file, flags, folder));
         }

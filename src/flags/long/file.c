@@ -45,7 +45,10 @@ static void print_file_permissions(t_file *file)
     my_putchar(file->stat.st_mode & S_IXGRP ? 'x' : '-');
     my_putchar(file->stat.st_mode & S_IROTH ? 'r' : '-');
     my_putchar(file->stat.st_mode & S_IWOTH ? 'w' : '-');
-    my_putchar(file->stat.st_mode & S_IXOTH ? 'x' : '-');
+    if (file->stat.st_mode & S_ISVTX)
+        my_putchar('T');
+    else
+        my_putchar(file->stat.st_mode & S_IXOTH ? 'x' : '-');
 }
 
 static char *format_date(t_file *file)
