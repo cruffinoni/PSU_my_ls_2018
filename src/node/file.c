@@ -86,7 +86,6 @@ int add_manually_file(t_folder *ptr, DIR *dir, char *folder, t_flags flags)
         }
         file = readdir(dir);
     }
-    my_putstr(folder);
     return (ERR_FILE);
 }
 

@@ -9,7 +9,7 @@
 #include "my.h"
 #include "ls.h"
 #include "node.h"
-#include "utils/file.h"
+#include "utils/file/file.h"
 
 static int count_folder_from_file(t_file *first_file)
 {
@@ -28,13 +28,11 @@ static size_t get_folder_size(t_file *header)
     size_t total = 0;
 
     while (header != NULL) {
-        if (header->dirent->d_name[0] != '.') {
-            total += (header->stat.st_size + header->stat.st_blksize - 1) /
-                header->stat.st_blksize * (header->stat.st_blksize / 1024);
-        }
+        if (header->dirent->d_name[0] != '.')
+            total += header->stat.st_blocks;
         header = header->next;
     }
-    return (total);
+    return (total / 2);
 }
 
 void swap_node_folder(t_folder *node_a, t_folder *node_b)

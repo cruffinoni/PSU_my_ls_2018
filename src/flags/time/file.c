@@ -6,7 +6,7 @@
 */
 
 #include "ls.h"
-#include "utils/file.h"
+#include "utils/file/file.h"
 #include "flags/time.h"
 
 static void find_folder_by_file(t_file **header, t_flags flag)

@@ -14,10 +14,14 @@
 
 int type_string(va_list args, t_local_spe specifier_infos)
 {
-    char *var = va_arg(args, char *);
+    char *var = NULL;
     int count = 0;
-    int str_len = my_strlen(var);
+    int str_len = 0;
 
+    if ((specifier_infos.flags_extra & EXTRAF_STAR) == EXTRAF_STAR)
+        specifier_infos.precision += va_arg(args, int);
+    var = va_arg(args, char *);
+    str_len = my_strlen(var);
     if ((specifier_infos.flags_extra & EXTRAF_MINUS) != EXTRAF_MINUS) {
         if (specifier_infos.precision > str_len)
             count += print_char_ite(specifier_infos.precision - str_len, ' ');

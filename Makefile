@@ -10,14 +10,18 @@ SRC	=	./src/node/folder.c 			\
 		./src/parse/flags.c 			\
 		./src/parse/folder.c 			\
 		./src/flags/reverse.c 			\
-		./src/flags/long.c 				\
+		./src/flags/long/file.c 		\
+		./src/flags/long/folder.c 		\
 		./src/flags/time.c 				\
 		./src/flags/directory.c 		\
 		./src/flags/time/file.c 		\
 		./src/flags/time/folder.c 		\
-		./src/utils/folder.c 			\
-		./src/utils/file.c 				\
+		./src/utils/folder/folder.c 	\
+		./src/utils/file/file.c 		\
 		./src/utils/str_manipulation.c 	\
+		./src/utils/summary/folder.c 	\
+		./src/utils/summary/file.c 		\
+		./src/utils/summary/core.c 		\
 
 MAIN_FILE = ./main.c
 

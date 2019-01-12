@@ -7,26 +7,29 @@
 
 #include "my.h"
 #include "ls.h"
-#include "flags/long.h"
-#include "utils/file.h"
+#include "flags/long/file.h"
+#include "flags/long/folder.h"
+#include "utils/summary/core.h"
 
-void display_files_title(t_file *header, t_flags flags)
+void display_files_title(t_file *header, t_flags flags, t_format_size format)
 {
-    t_format_size size = {get_bigger_nblk(header), get_bigger_file(header)};
-
     while (header != NULL) {
         if (flags & FLAG_l)
-            print_long_format(header, size);
+            print_lformat_file(header, format, 1);
         else
             my_printf("%s\n", header->path);
         header = header->next;
     }
 }
 
-void display_folders_title(t_folder *header)
+void display_folders_title(t_folder *header, t_flags flags,
+    t_format_size format)
 {
     while (header != NULL) {
-        my_printf("%s\n", header->original_path);
+        if (flags & FLAG_l)
+            print_lformat_folder(header, format);
+        else
+            my_printf("%s\n", header->original_path);
         header = header->next;
     }
 }

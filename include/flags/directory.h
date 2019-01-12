@@ -10,7 +10,8 @@
 
 #include "ls.h"
 
-void display_files_title(t_file *header, t_flags flags);
-void display_folders_title(t_folder *header);
+void display_files_title(t_file *header, t_flags flags, t_format_size format);
+void display_folders_title(t_folder *header, t_flags flags,
+    t_format_size format);
 
 #endif

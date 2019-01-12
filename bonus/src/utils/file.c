@@ -46,7 +46,7 @@ static void print_file(t_file *file, t_flags flags, t_format_size size)
     if (file->dirent->d_name[0] == '.')
         return;
     if (flags & FLAG_l)
-        print_long_format(file, size);
+        print_lformat_file(file, size);
     else if (file->dirent->d_type == DT_DIR)
         my_printf(COLOR_FOLDER"%s"COLOR_NORMAL"\n", file->dirent->d_name);
     else

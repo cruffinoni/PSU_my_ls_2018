@@ -5,48 +5,22 @@
 ** Utils functions for manipulating files.
 */
 
-#include <time.h>
 #include "my.h"
 #include "ls.h"
-#include "flags/long.h"
-#include "utils/folder.h"
-
-size_t get_bigger_file(t_file *file)
-{
-    size_t max_size = 0;
-    size_t size = 0;
-
-    while (file != NULL) {
-        if (file->dirent->d_name[0] != '.')
-            size = int_strlen(file->stat.st_size);
-        if (size > max_size)
-            max_size = size;
-        file = file->next;
-    }
-    return (max_size);
-}
-
-size_t get_bigger_nblk(t_file *file)
-{
-    size_t max_size = 0;
-    size_t size = 0;
-
-    while (file != NULL) {
-        if (file->dirent->d_name[0] != '.')
-            size = int_strlen(file->stat.st_nlink);
-        if (size > max_size)
-            max_size = size;
-        file = file->next;
-    }
-    return (max_size);
-}
+#include "flags/long/file.h"
+#include "utils/folder/folder.h"
+#include "utils/summary/core.h"
 
 static void print_file(t_file *file, t_flags flags, t_format_size size)
 {
     if (file->dirent->d_name[0] == '.')
         return;
-    if (flags & FLAG_l)
-        print_long_format(file, size);
+    if (flags & FLAG_l) {
+        if (flags & FLAGI_f)
+            print_lformat_file(file, size, 1);
+        else
+            print_lformat_file(file, size, 0);
+    }
     else
         my_printf("%s\n", file->dirent->d_name);
 }
@@ -77,7 +51,7 @@ void swap_node_file(t_file *node_a, t_file *node_b)
 void display_files(t_file *header, t_flags flags)
 {
     t_file *base = header;
-    t_format_size size = {get_bigger_nblk(header), get_bigger_file(header)};
+    t_format_size size = get_file_format_size(header);
 
     while (header != NULL) {
         print_file(header, flags, size);

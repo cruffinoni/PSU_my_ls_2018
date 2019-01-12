@@ -64,7 +64,8 @@ int detect_folders(t_folder **folder, t_folder **file,
     for (int i = argc - 1; i > 0; i--) {
         if (tab[i][0] != '-')
             returned_val = check_folder_name(folder, *file, tab[i], flags);
-        if (returned_val == ERR_MALLOC || returned_val == ERR_FILE)
+        if (returned_val == ERR_MALLOC || (returned_val == ERR_FILE &&
+            errno == EACCES))
             return (returned_val);
     }
     if (count_folder(*folder) < 1 && (*file)->hfile == NULL)

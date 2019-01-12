@@ -52,6 +52,8 @@ typedef struct s_long_format_size
 {
     size_t nblink;
     size_t size;
+    size_t asize;
+    size_t gsize;
 } t_format_size;
 
 #endif

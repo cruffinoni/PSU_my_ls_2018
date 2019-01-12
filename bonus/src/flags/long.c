@@ -64,7 +64,7 @@ static int format_folder_name(t_file *file, char *date, t_format_size bsize)
     return (ERR_NONE);
 }
 
-void print_long_format(t_file *file, t_format_size bsize)
+void print_lformat_file(t_file *file, t_format_size bsize)
 {
     char *date = format_date(file);
     char link[256];

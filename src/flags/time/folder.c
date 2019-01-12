@@ -6,7 +6,7 @@
 */
 
 #include "ls.h"
-#include "utils/folder.h"
+#include "utils/folder/folder.h"
 #include "flags/time.h"
 
 static void check_swap_folder(t_folder **header, t_folder *current)

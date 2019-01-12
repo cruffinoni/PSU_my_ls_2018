@@ -7,8 +7,8 @@
 
 #include "my.h"
 #include "ls.h"
-#include "utils/folder.h"
-#include "utils/file.h"
+#include "utils/folder/folder.h"
+#include "utils/file/file.h"
 #include "flags/time.h"
 
 void sort_by_time(t_folder **header, t_flags flag)
