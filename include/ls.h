@@ -15,6 +15,12 @@
 #include <errno.h>
 #include "errors.h"
 
+#ifndef COLOR_FOLDER
+    #define COLOR_FOLDER    "\x1B[32m"
+    #define COLOR_NORMAL    "\x1B[0m"
+    #define COLOR_TITLE     "\x1B[31m"
+#endif
+
 typedef struct stat t_stat;
 typedef struct dirent t_dirent;
 
@@ -55,5 +61,11 @@ typedef struct s_long_format_size
     size_t asize;
     size_t gsize;
 } t_format_size;
+
+typedef struct s_multiple_folder
+{
+    t_folder **header;
+    t_folder **file;
+} t_multiple_folder;
 
 #endif

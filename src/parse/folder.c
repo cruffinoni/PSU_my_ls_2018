@@ -52,23 +52,24 @@ static int check_folder_name(t_folder **ptr, t_folder *file,
     return (returned_val);
 }
 
-int detect_folders(t_folder **folder, t_folder **file,
-    t_flags *flags, char **tab, int argc)
+int detect_folders(t_multiple_folder *folder, t_flags *flags,
+    char **tab, int argc)
 {
     int returned_val = ERR_NONE;
 
-    (*file)->next = NULL;
-    (*file)->prev = NULL;
-    (*file)->hfile = NULL;
-    (*file)->directory = NULL;
+    (*folder->file)->next = NULL;
+    (*folder->file)->prev = NULL;
+    (*folder->file)->hfile = NULL;
+    (*folder->file)->directory = NULL;
     for (int i = argc - 1; i > 0; i--) {
         if (tab[i][0] != '-')
-            returned_val = check_folder_name(folder, *file, tab[i], flags);
+            returned_val = check_folder_name(folder->header, (*folder->file),
+                tab[i], flags);
         if (returned_val == ERR_MALLOC || (returned_val == ERR_FILE &&
             errno == EACCES))
             return (returned_val);
     }
-    if (count_folder(*folder) < 1 && (*file)->hfile == NULL)
-        add_folder(folder, "./", ".", *flags);
+    if (count_folder(*folder->header) < 1 && (*folder->file)->hfile == NULL)
+        add_folder(folder->header, "./", ".", *flags);
     return (ERR_NONE);
 }

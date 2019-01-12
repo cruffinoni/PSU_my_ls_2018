@@ -1,7 +1,7 @@
 /*
 ** EPITECH PROJECT, 2018
 ** file.c
-** folder description:
+** File description:
 ** Summary of different aspects.
 */
 

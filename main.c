@@ -53,11 +53,14 @@ int main(int ac, char **av)
     t_folder *header = NULL;
     t_folder *inline_file = malloc(sizeof(t_folder));
     t_flags flags = 0;
+    t_multiple_folder *both = malloc(sizeof(t_multiple_folder));
 
     if (inline_file == NULL)
         return (ERR_INIT);
+    both->header = &header;
+    both->file = &inline_file;
     flags = detect_flags(av, ac);
-    if (detect_folders(&header, &inline_file, &flags, av, ac) != ERR_NONE)
+    if (detect_folders(both, &flags, av, ac) != ERR_NONE)
         return (ERR_INIT);
     operand_flags(&header, &inline_file, flags);
     display_results(&header, &inline_file, flags);

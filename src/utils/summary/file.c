@@ -1,7 +1,7 @@
 /*
 ** EPITECH PROJECT, 2018
 ** file.c
-** folder description:
+** File description:
 ** Summary of different aspects.
 */
 
@@ -86,7 +86,5 @@ t_format_size get_file_format_size(t_file *file)
     t_format_size format = {get_file_bigger_nblk(file),
         get_bigger_file(file), get_file_bigger_aname(file),
         get_file_bigger_gname(file)};
-    // printf("End is: %i & %i & %i & %i\n", format.nblink, format.size,
-    //     format.asize, format.gsize);
     return (format);
 }
