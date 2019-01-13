@@ -67,5 +67,6 @@ int main(int ac, char **av)
     delete_folders(&header);
     free_files(&inline_file->hfile);
     free(inline_file);
+    free(both);
     return (ERR_NONE);
 }

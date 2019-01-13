@@ -65,8 +65,7 @@ int detect_folders(t_multiple_folder *folder, t_flags *flags,
         if (tab[i][0] != '-')
             returned_val = check_folder_name(folder->header, (*folder->file),
                 tab[i], flags);
-        if (returned_val == ERR_MALLOC || (returned_val == ERR_FILE &&
-            errno == EACCES))
+        if (returned_val == ERR_MALLOC || returned_val == ERR_FILE)
             return (returned_val);
     }
     if (count_folder(*folder->header) < 1 && (*folder->file)->hfile == NULL)

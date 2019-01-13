@@ -47,7 +47,8 @@ size_t get_folder_bigger_aname(t_folder *folder)
 
     while (folder != NULL) {
         pinfo = getpwuid(folder->stat.st_gid);
-        size = my_strlen(pinfo->pw_name);
+        if (pinfo != NULL)
+            size = my_strlen(pinfo->pw_name);
         if (size > max_size)
             max_size = size;
         folder = folder->next;
@@ -63,7 +64,8 @@ size_t get_folder_bigger_gname(t_folder *folder)
 
     while (folder != NULL) {
         pinfo = getgrgid(folder->stat.st_gid);
-        size = my_strlen(pinfo->gr_name);
+        if (pinfo != NULL)
+            size = my_strlen(pinfo->gr_name);
         if (size > max_size)
             max_size = size;
         folder = folder->next;
