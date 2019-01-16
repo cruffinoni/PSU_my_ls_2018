@@ -68,16 +68,16 @@ static int format_folder_name(t_file *file, char *date, t_format_size bsize,
     int force_path)
 {
     struct group *ginfo = getgrgid(file->stat.st_gid);
-    struct passwd *pinfo = getpwuid(file->stat.st_gid);
+    struct passwd *pinfo = getpwuid(file->stat.st_uid);
 
     if (ginfo == NULL || pinfo == NULL)
         return (ERR_MALLOC);
     print_file_permissions(file);
     if (force_path)
-        my_printf(" %i %s %s %i %s %s", file->stat.st_nlink, ginfo->gr_name,
+        my_printf(". %i %s %s %i %s %s", file->stat.st_nlink, ginfo->gr_name,
             pinfo->pw_name, file->stat.st_size, date, file->path);
     else
-        my_printf(" %i %s %s %i %s %s", file->stat.st_nlink, ginfo->gr_name,
+        my_printf(". %i %s %s %i %s %s", file->stat.st_nlink, ginfo->gr_name,
             pinfo->pw_name, file->stat.st_size, date, file->dirent->d_name);
     return (ERR_NONE);
 }

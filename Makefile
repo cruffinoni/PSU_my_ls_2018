@@ -33,7 +33,8 @@ LIB_PATH 	= ./lib/my/
 INCLUDE_PATH = ./include/
 LIB_NAME = libmy.a
 
-CFLAGS	=	-W -Wall -Wextra -I $(INCLUDE_PATH) -L $(LIB_PATH) -lmy
+CSFML_FLAGS = -l csfml-graphics -l csfml-window -l csfml-system -l csfml-audio
+CFLAGS = -W -Wall -Wextra $(CSFML_FLAGS) -I $(INCLUDE_PATH) -L $(LIB_PATH) -lmy
 
 OBJ	=	$(SRC:.c=.o)
 OBJ_MAIN = $(MAIN_FILE:.c=.o)
