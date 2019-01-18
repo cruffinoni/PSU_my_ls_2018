@@ -49,7 +49,7 @@ static int format_folder_name(t_folder *folder, char *date,
     if (ginfo == NULL || pinfo == NULL)
         return (ERR_MALLOC);
     print_file_permissions(folder);
-        my_printf(". %i %s %s %i %s %s", folder->stat.st_nlink, ginfo->gr_name,
+        my_printf(" %i %s %s %i %s %s", folder->stat.st_nlink, ginfo->gr_name,
             pinfo->pw_name, folder->stat.st_size, date, folder->original_path);
     return (ERR_NONE);
 }
