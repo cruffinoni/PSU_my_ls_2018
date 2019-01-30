@@ -8,3 +8,6 @@ a.out
 *.a
 *.txt
 tests/
+cmake-build-debug
+CMakeLists.*
+.idea/
